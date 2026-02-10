@@ -85,7 +85,7 @@ Okay, let's write some code. We need only one function `compile(input: string)` 
 
     compile = (input) -> 
 
-First start with lexer what will be splitting input sequence of characters into tokens.  
+First, start with a lexer that splits the input sequence of characters.  
 For example next input string `pow(1, 2 + 3)` will be transformed into array `['pow', '(', '1', ',', '2', '+', '3', ')']`.
 
       tokens = []
@@ -183,10 +183,9 @@ _termR_ → * _factor_ {puts("*")} _termR_ | / _factor_ {puts("/")} _termR_ | �
         else if lookahead == "/"
           match("/"); factor(); puts("/"); termR()
 
-Next goes tricky production rule. First, we lookahead if there `(`, 
-which will mean what current we at expression in brackets.
-Second, try use production rule for function call.
-Third, if function call production fails, consider current token as an atom.  
+Next comes the tricky production rule. First, we look ahead to see if there is a '(' which means we are currently within an expression in brackets.
+Second, we try to use the production rule for a function call.
+Third, if the function call production fails, we consider the current token to be an atom.
 _factor_ → ( _expr_ ) | _atom_ | _call_
 
       factor = ->
